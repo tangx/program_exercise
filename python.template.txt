@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+# encoding: utf-8
+#
+
+"""
+@version:  ??
+@author: TangHsin
+@license: Apache Licence
+@mailto: uyinn28@gmail.com
+@site: ${SITE}
+@software: ${PRODUCT_NAME}
+@FILE: ${NAME}.py
+@time: ${DATE} ${TIME}
+"""
+
+
+def main():
+    pass
+
+if __name__=='__main__':
+    main()

@@ -63,10 +63,28 @@ def pyspider_http_proxy():
 
     abs_url = r'http://tieba.baidu.com/p/4452126446'
     content = urllib2.urlopen(abs_url)
-    print content.headers
-    print content.fp
+    # print content.headers
+    # print content.info()  # headers
+
+    # print content.fp
+
+    # print '-----'
     print content.getcode()
-    print content.geturl()
+    # print content.code  # getcode()
+
+    # print '-----'
+    # print content.geturl()
+    # print content.url  # geturl()
+
+    # print '-----'
+    # print content.msg
+    # print content.next()  # dir(content.next)
+
+    # print '-----'
+    # print content.readline()
+    # print content.read()
+    # print content.readlines()
+    # print dir(content)
 
     print dir(content)
 

@@ -18,8 +18,8 @@
 ## 4. 多线程并发抓取
 ## 5. 验证码处理
 ## 6. gzip/deflate支持
-    [爬虫端支持压缩](./pyspider_s3_request_headers.py) headers{'Accept-Encoding':'gzip, deflate, sdch'}
-    [解压缩gzip/deflate](./pyspider_s3_extract_respons.py)
+  1. [爬虫端支持压缩](./pyspider_s3_request_headers.py) headers{'Accept-Encoding':'gzip, deflate, sdch'}
+  2. [解压缩gzip/deflate](./pyspider_s3_extract_respons.py)
 ## 7. 更方便的多线程
     7.1 用twisted进行异步I/O抓取
 ## 8. 一些琐碎的经验

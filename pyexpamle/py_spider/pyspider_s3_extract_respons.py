@@ -18,7 +18,6 @@
  参考文档:http://www.jianshu.com/p/2c2781462902
 '''
 
-
 import urllib2
 from StringIO import StringIO
 from gzip import GzipFile
@@ -26,12 +25,9 @@ from gzip import GzipFile
 
 def extract_gzip(resp):
     old_resp = resp
-
     fileobj = StringIO(resp.read())
     fp = GzipFile(fileobj=fileobj, mode='r')
-
     resp = urllib2.addinfourl(fp=fp, headers=old_resp.headers, url=old_resp.url, code=old_resp.code)
-
     return resp
 
 
@@ -49,15 +45,15 @@ def deflate(data):
 
 
 def extract(resp):
-    # old_resp = resp
     data = resp.read()
-    # compress_mode = resp.headers.get('content-encoding')
+
     if resp.headers.get('content-encoding') == 'gzip':
         data = gzip(data)
     if resp.headers.get('content-encoding') == 'deflate':
         data = deflate(data)
 
     resp = urllib2.addinfourl(data, resp.headers, resp.url, resp.code)
+
     return resp
 
 

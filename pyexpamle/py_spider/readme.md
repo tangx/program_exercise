@@ -9,17 +9,40 @@
   1. [http代理](./pyspider_s2_http_proxy.py)
   2. [代理有效性检查 http_proxy](./pyspider_s2_check_proxy.py)
     
-## 3. 需要登录的情况 
+## 3. 伪装浏览器
     3.1 cookie的处理
     3.2 表单的处理
-### 3.3 伪装浏览器访问
+
+### 使用headers
+[使用header伪装浏览器](./pyspider_s3_request_headers.py)
+```python
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36',
+    'X-Forwarded-For': '8.8.8.8',  # 伪装IP地址
+    'Accept': 'image/webp,image/*,*/*;q=0.8',
+    # 'Accept-Encoding': 'gzip, deflate, sdch',  # 使用后压缩结果
+    'Accept-Language': 'zh-CN,zh;q=0.8',
+    'Cache-Control': 'max-age=0',
+    'Connection': 'keep-alive',
+    # 'Content-Type': 'application/html',
+}
+
+url_request = urllib2.Request(abs_url, headers=headers)
+# content = urllib2.Request(abs_url)
+content = urllib2.urlopen(url_request)
+```
     3.4 反"反盗链"
     3.5 终极绝招
+
 ## 4. 多线程并发抓取
+
 ## 5. 验证码处理
+
 ## 6. gzip/deflate支持
-  1. [爬虫端支持压缩](./pyspider_s3_request_headers.py) headers{'Accept-Encoding':'gzip, deflate, sdch'}
+  1. [header中添加支持压缩](./pyspider_s3_request_headers.py)
+  `headers{'Accept-Encoding':'gzip, deflate, sdch'}`
   2. [解压缩gzip/deflate](./pyspider_s3_extract_respons.py)
+
 ## 7. 更方便的多线程
     7.1 用twisted进行异步I/O抓取
 ## 8. 一些琐碎的经验

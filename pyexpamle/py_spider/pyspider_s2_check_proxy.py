@@ -25,6 +25,8 @@ def check_proxy(proxy_addr, proxy_port, proxy_type):
 
     '''
 
+    print "%s:%s , %s  -> " % (proxy_addr, proxy_port, proxy_type),
+
     gg_url = 'http://ip.cn/'
     proxy = "%s:%s" % (proxy_addr, proxy_port)
 
@@ -39,10 +41,12 @@ def check_proxy(proxy_addr, proxy_port, proxy_type):
 
         if content.getcode() == 200:
             # print proxy_type
+            print 'Actived'
             return {'proxy_addr': proxy_addr, 'proxy_port': proxy_port, 'proxy_type': proxy_type}
 
     except Exception:
-        return -1
+        print 'Failed'
+        # return -1
 
 
 def check_socket_proxy(proxy_addr, proxy_port, proxy_type):
@@ -89,7 +93,8 @@ def check_socket_proxy(proxy_addr, proxy_port, proxy_type):
             return {'proxy_addr': proxy_addr, 'proxy_port': proxy_port, 'proxy_type': proxy_type}
 
     except Exception:
-        return -1
+        # return -1
+        pass
 
 
 if __name__ == '__main__':
@@ -100,5 +105,5 @@ if __name__ == '__main__':
     proxy_addr = proxy_pool[0]
     proxy_port = proxy_pool[1]
     proxy_type = proxy_pool[2]
-    # print check_proxy(proxy_addr, proxy_port, proxy_type)
-    print check_socket_proxy(proxy_addr, proxy_port, proxy_type)
+    print check_proxy(proxy_addr, proxy_port, proxy_type)
+    # print check_socket_proxy(proxy_addr, proxy_port, proxy_type)

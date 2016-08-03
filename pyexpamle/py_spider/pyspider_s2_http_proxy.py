@@ -24,7 +24,7 @@ import os
 import sys
 import urllib2
 # from ntlm import HTTPNtlmAuthHandler
-# import pyspider_v1_01
+# import pyspider_s1_get_proxy
 import random
 
 proxy_list = [

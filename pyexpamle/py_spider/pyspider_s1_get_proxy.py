@@ -4,13 +4,18 @@
 #
 import urllib
 import re
+import pyspider_s2_check_proxy
 
 
 def get_http_proxy():
-    # abs_url=ur'http: // proxy.goubanjia.com / free / index.shtml'
-    abs_url = r'http://www.kuaidaili.com/free/inha/'
+    # abs_url=ur'http://proxy.goubanjia.com/free/index.shtml'
+    abs_url = r'http://www.kuaidaili.com/'
+    # abs_url = r'http://www.kuaidaili.com/free/inha/'
     content = urllib.urlopen(abs_url).read()
+
     # print content
+
+    print content
 
     ip_patt = r'\d+?\.\d+?\.\d+?\.\d+?'
     port_patt = r'PORT">\d+</td>'
@@ -28,14 +33,20 @@ def get_http_proxy():
     # 但，ip和port是一一对应关系，所以分别存入两个数组当中
     # 最后使用 i 为索引取得相应的 IP和port
 
-    proxy_datas = []
+    actived_proxy_list = []
     for i in xrange(len(ip_list)):
         # print "%s : %s" % (ip_list[i], port_list[i].split('>')[1].rsplit('<')[0])
         ipaddr = ip_list[i]
         port = port_list[i].split('>')[1].rsplit('<')[0]
-        proxy_datas.append({'ipaddr': ipaddr, 'port': port})
 
-    return proxy_datas
+        # proxy_datas.append({'ipaddr': ipaddr, 'port': port})
+
+        proxy_actived = pyspider_s2_check_proxy.check_proxy(ipaddr, port, 'http')
+
+        if proxy_actived is dict:
+            proxy_datas.append(proxy_actived)
+
+    return actived_proxy_list
 
 
 if __name__ == "__main__":

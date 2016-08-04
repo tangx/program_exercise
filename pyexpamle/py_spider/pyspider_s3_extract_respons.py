@@ -53,8 +53,8 @@ def deflate(data):
 
 def extract_v2(resp):
     # old_resp = resp
-    data = ''
     try:
+        data = ''
         if resp.headers.get('content-encoding') == 'gzip':
             data = gzip(resp.read())
             # resp = urllib2.addinfourl(data, resp.headers, resp.url, resp.code)

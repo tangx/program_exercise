@@ -39,7 +39,8 @@ data=urllib.urlencode(login_para)
 resp=opener.open(url,data,timeout=3)
 print resp.read()
 ```
-[使用Fidder进行嗅探做爬虫签到](http://blog.csdn.net/u283056051/article/details/49946981)
+[使用Fidder进行嗅探做爬虫签到](http://blog.csdn.net/u283056051/article/details/49946981) 
+
 [zimuzu.tv 登录签到](./pyspider_s3_zimuzuTV_sign.py)
 
     3.2 表单的处理

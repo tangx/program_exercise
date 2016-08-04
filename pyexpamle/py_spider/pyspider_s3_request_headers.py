@@ -49,7 +49,7 @@ def urllib2_headers():
         'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36',
         'X-Forwarded-For': '8.8.8.8',  # 伪装IP地址
         'Accept': 'image/webp,image/*,*/*;q=0.8',
-        # 'Accept-Encoding': 'gzip, deflate, sdch',  # 使用后压缩结果
+        'Accept-Encoding': 'gzip, deflate, sdch',  # 使用后压缩结果
         'Accept-Language': 'zh-CN,zh;q=0.8',
         'Cache-Control': 'max-age=0',
         'Connection': 'keep-alive',
@@ -59,21 +59,33 @@ def urllib2_headers():
     url_request = urllib2.Request(abs_url, headers=headers)
     # content = urllib2.Request(abs_url)
     content = urllib2.urlopen(url_request)
-
+    print content.headers
+    print content.headers.get('content-encoding')
+    # print content.read()
+    # '''
+    # # urllib2返回的结果,只能被read一次. 如果第二次read, 将返回空字符串.
+    # # 因此在使用的时候, 最好存入变量内, 以便复用.
+    # # 对urllib2.urlopen的返回的content使用 read(), readline, readlines() 后,都会改变 content的值.
+    # '''
+    # print len(content.read())
+    # print len(content.read())
     # print content.headers['Content-Encoding']
     # print content.headers.get('content-encoding')
 
     # content = extract_respons(content)
     # content = pyspider_s3_extract_respons.extract_gzip(content)
-    # content=pyspider_s3_extract_respons.extract(content)
-    try:
-        content = pyspider_s3_extract_respons.extract(content)
-    except:
-        pass
+    content = pyspider_s3_extract_respons.extract_v2(content)
 
+    # print content.read()
+    # try:
+    #     content = pyspider_s3_extract_respons.extract(content)
+    # except:
+    #     pass
+
+    # print len(content.read())
     print content.read()
-    print content.headers
-    print dir(content)
+    # print content.headers
+    # print dir(content)
 
 
 def requests_headers():

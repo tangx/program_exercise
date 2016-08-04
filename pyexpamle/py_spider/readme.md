@@ -10,8 +10,40 @@
   2. [代理有效性检查 http_proxy](./pyspider_s2_check_proxy.py)
     
 ## 3. 伪装浏览器
-    3.1 cookie的处理
+### 3.1 cookie的处理
+```python
+import cookielib
+import urllib
+import urllib2
+
+# 使用cookie
+cj = cookielib.CookieJar()
+pro = urllib2.HTTPCookieProcessor(cj)
+opener = urllib2.build_opener(pro)
+
+# 添加headers
+# head_list=[('User-Agent',agent_value),('Accept-Language', 'zh-CN,zh;q=0.8')]
+# opener.addheaders = header_list
+
+# # # # # # # #
+
+# 用户信息
+# 以下内容为表单信息, 可以使用fiddle进行嗅探
+login_para={
+    'user':username,
+    'passwd':passwd,
+}
+data=urllib.urlencode(login_para)
+
+# 进行登录
+resp=opener.open(url,data,timeout=3)
+print resp.read()
+```
+[使用Fidder进行嗅探做爬虫签到](http://blog.csdn.net/u283056051/article/details/49946981)
+[zimuzu.tv 登录签到](./pyspider_s3_zimuzuTV_sign.py)
+
     3.2 表单的处理
+    
 
 ### 使用headers
 [使用header伪装浏览器](./pyspider_s3_request_headers.py)

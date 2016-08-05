@@ -23,7 +23,7 @@ def get_opener():
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36',
-        # 'X-Forwarded-For': '8.8.8.8',  # 伪装IP地址
+        'X-Forwarded-For': '171.212.113.133',  # 伪装IP地址
         'Accept': 'image/webp,image/*,*/*;q=0.8',
         # 'Accept-Encoding': 'gzip, deflate, sdch',  # 使用后压缩结果
         'Accept-Language': 'zh-CN,zh;q=0.8',
@@ -54,16 +54,20 @@ def feng666_checkin(username, password):
     login_paras = urllib.urlencode(loginInfo)
     opener = get_opener()
 
-    # 登录
-    loginResp = opener.open(loginUrl, login_paras, timeout=3)
-    print loginResp.read()
+    try:
+        # 登录
+        loginResp = opener.open(loginUrl, login_paras, timeout=3)
+        print loginResp.read()
 
-    checkinResp = opener.open(checkinUrl, timeout=3)
-    print checkinResp.read()
+        # 签到
+        checkinResp = opener.open(checkinUrl, timeout=3)
+        print checkinResp.read()
+    except:
+        pass
 
 
 if __name__ == '__main__':
-
     username = 'your_email'
     password = 'your_password'
+
     feng666_checkin(username, password)

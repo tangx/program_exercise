@@ -20,29 +20,34 @@ def check_proxy(proxy_addr, proxy_port, proxy_type):
     '''
         :这种方法可以使用socks代理
         :param proxy: '127.0.0.1:8087'
-        :param protocol:  'http' or 'https' or 'socks5'
+        :param protocol:  'http' or 'https' or 'socks5' #  socks 代理有问题
         :return:   success to return a dict , failed to return -1
 
     '''
-
-    print "%s:%s , %s  -> " % (proxy_addr, proxy_port, proxy_type),
 
     gg_url = 'http://ip.cn/'
     proxy = "%s:%s" % (proxy_addr, proxy_port)
 
     # 绑定代理
-    url_handler = urllib2.ProxyHandler({proxy_type: proxy})
-    opener = urllib2.build_opener(url_handler)
+    proxy_support = urllib2.ProxyHandler({proxy_type: proxy})
+    # proxy_support = urllib2.ProxyHandler({'socks5': '127.0.0.1:36963'})
+
+    opener = urllib2.build_opener(proxy_support, urllib2.HTTPHandler)
     urllib2.install_opener(opener=opener)
+
 
     try:
         content = urllib2.urlopen(gg_url, timeout=3)
+        # print content.read()
         # print content.getcode()
 
+        print "%s:%s , %s  -> " % (proxy_addr, proxy_port, proxy_type),
         if content.getcode() == 200:
             # print proxy_type
             print 'Actived'
             return {'proxy_addr': proxy_addr, 'proxy_port': proxy_port, 'proxy_type': proxy_type}
+
+
 
     except Exception:
         print 'Failed'
@@ -87,6 +92,7 @@ def check_socket_proxy(proxy_addr, proxy_port, proxy_type):
 
 
     try:
+        print gg_url
         content = urllib2.urlopen(gg_url, timeout=3)
         # print content.getcode()
         if content.getcode() == 200:
@@ -100,8 +106,8 @@ def check_socket_proxy(proxy_addr, proxy_port, proxy_type):
 if __name__ == '__main__':
     # proxy = ur'127.0.0.1:8087'
     # protocol = ur'http'
-    proxy_pool = ['127.0.0.1', 8087, 'http']
-    # proxy_pool = ['127.0.0.1', 36963, 'socks5']
+    # proxy_pool = ['127.0.0.1', 8087, 'http']
+    proxy_pool = ['127.0.0.1', 36963, 'socks5']
     proxy_addr = proxy_pool[0]
     proxy_port = proxy_pool[1]
     proxy_type = proxy_pool[2]

@@ -20,9 +20,7 @@ import cookielib
 import urllib
 
 
-def zimuzuTV_login():
-    username = 'Zz5Rkwu'
-    password = 'HaMgC3h1w'
+def zimuzuTV_login(username,password):
     loginUrl = 'http://www.zimuzu.tv/user/login'
     login_params = {'domain': 'zimuzu.tv', 'email': username, 'password': password}
     user_agent = random.choice(pyspider_headers_list.user_agent)
@@ -49,5 +47,8 @@ def zimuzuTV_login():
 
 
 if __name__ == '__main__':
-    zimuzuTV_login()
+
+    username = 'xxxxxxxxxxx'
+    password = 'wwwwwwwwwww'
+    zimuzuTV_login(username,password)
     pass

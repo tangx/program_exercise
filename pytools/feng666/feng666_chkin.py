@@ -63,11 +63,12 @@ def do_login(username, password):
     opener = get_opener()
 
     try:
+        print 'use https'
         loginURL = 'https://%s/%s' % (hostname, loginURI)
         # resp = urllib2.urlopen(loginURL, login_paras, timeout=3)
         resp = opener.open(loginURL, login_paras, timeout=3)
         data = resp.read()
-        # print login_stat
+        print data
         if data == '{"ret":1,"msg":"\u6b22\u8fce\u56de\u6765"}':
             return {
                 'http_type': 'https',
@@ -76,10 +77,11 @@ def do_login(username, password):
 
     except:
         try:
-            loginURL = 'https://%s/%s' % (hostname, loginURI)
+            print 'use http'
+            loginURL = 'http://%s/%s' % (hostname, loginURI)
             resp = opener.open(loginURL, login_paras, timeout=3)
             data = resp.read()
-            # print login_stat
+            print data
             if data == '{"ret":1,"msg":"\u6b22\u8fce\u56de\u6765"}':
                 return {
                     'http_type': 'http',
@@ -104,13 +106,15 @@ def do_checkin(opener, http_type):
 def get_ss_node_info(content):
     # print type(content)
     content = content.decode('utf8')
-    server_str = u'\<div.*?\<a.*?\>([\d\w\u4e00-\u9fff]+-SS)\<\/a\>.*?\<p\>地址：\<span.*?(\d+\.\d+\.\d+\.\d+).*?\<\/span\>\<\/p\>.*?\<p\>加密方式：\<span.*?\t([\w\d-]+).*?\<p\>协议：\<span.*?\t(\w+).*?\<p\>混淆方式：\<span.*?\t(\w+).*?'
+    # server_str = u'\<div.*?\<a.*?\>([\d\w\uff0c\u4e00-\u9fff]+-SS)\<\/a\>.*?\<p\>地址：\<span.*?(\d+\.\d+\.\d+\.\d+).*?\<\/span\>\<\/p\>.*?\<p\>加密方式：\<span.*?\t([\w\d-]+).*?\<p\>协议：\<span.*?\t(\w+).*?\<p\>混淆方式：\<span.*?\t(\w+).*?'
+    # server_str = u'\<div.*?\<a.*?\>([\d\w\uff0c\u4e00-\u9fff]+-SS)\<\/a\>.*?\<span class=\"label label-green\"\>OK\<\/span\>.*?\<p\>地址：\<span.*?(\d+\.\d+\.\d+\.\d+).*?\<\/span\>\<\/p\>.*?\<p\>加密方式：\<span.*?\t([\w\d-]+).*?\<p\>协议：\<span.*?\t(\w+).*?\<p\>混淆方式：\<span.*?\t(\w+).*?'
+    server_str = u'\<span class=\"icon text-green\"\>backup\<\/span\>.*?\<div.*?\<a.*?\>([\d\w\uff0c\u4e00-\u9fff]+-SS)\<\/a\>.*?\<p\>地址：\<span.*?(\d+\.\d+\.\d+\.\d+).*?\<\/span\>\<\/p\>.*?\<p\>加密方式：\<span.*?\t([\w\d-]+).*?\<p\>协议：\<span.*?\t(\w+).*?\<p\>混淆方式：\<span.*?\t(\w+).*?'
 
     server_patt = re.compile(server_str, flags=re.DOTALL + re.MULTILINE)
-    infos = server_patt.findall(content)
+    nodes_info = server_patt.findall(content)
 
-    # print infos
-    return infos
+    print nodes_info
+    return nodes_info
 
 
 def get_ss_user_info(content):
@@ -148,8 +152,8 @@ def main_feng666(username, password):
     http_type = login_stat['http_type']
     opener = login_stat['opener']
 
-    do_checkin(opener, http_type)           # 签到
-    do_setup_json(opener, http_type)    # 生成当日服务器列表
+    do_checkin(opener, http_type)  # 签到
+    do_setup_json(opener, http_type)  # 生成当日服务器列表
 
 
 if __name__ == '__main__':

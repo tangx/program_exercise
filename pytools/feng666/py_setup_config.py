@@ -19,9 +19,13 @@ import re
 
 #################
 json_tmpl_abs = 'gui-config.json.tmpl'
-json_setup_abs = 'gui-config.json'
+# json_setup_abs = 'gui-config.json'
+if os.name == 'nt':
+    json_setup_abs = r'E:\Documents\OneDrive\tools\shadowsocks-win-3.0\gui-config.json'
+else:
+    json_setup_abs = r'/mnt/e/Documents/OneDrive/tools/shadowsocks-win-3.0/gui-config.json'
 
-localPort = 6666
+localPort = 36363
 
 # line pattern
 remarks_patt = re.compile('\${remarks\}')
@@ -50,10 +54,11 @@ def node_block_sub_line(line, node_info, user_info):
     return line
 
 
-def setup_ss_json(user_info, nodes_info):
+def setup_ss_json(user_info, nodes_info, json_path_name=json_setup_abs):
     #
     # 开始执行
     #
+    print len(nodes_info)
 
     # 读取 模板 文件
     f = open(json_tmpl_abs, 'r')
@@ -77,7 +82,8 @@ def setup_ss_json(user_info, nodes_info):
 
     # 以UTF-8的模式写入文件
     import codecs
-    f = codecs.open(json_setup_abs, 'w', 'utf-8')
+    # f = codecs.open(json_setup_abs, 'w', 'utf-8')
+    f = codecs.open(json_path_name, 'w', 'utf-8')
     f.write(content)
     f.close()
 

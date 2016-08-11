@@ -74,21 +74,22 @@ def do_login(username, password):
                 'http_type': 'https',
                 'opener': opener,
             }
+    except Exception as err:
+        print err
 
-    except:
-        try:
-            print 'use http'
-            loginURL = 'http://%s/%s' % (hostname, loginURI)
-            resp = opener.open(loginURL, login_paras, timeout=3)
-            data = resp.read()
-            print data
-            if data == '{"ret":1,"msg":"\u6b22\u8fce\u56de\u6765"}':
-                return {
-                    'http_type': 'http',
-                    'opener': opener,
-                }
-        except:
-            pass
+    try:
+        print 'use http'
+        loginURL = 'http://%s/%s' % (hostname, loginURI)
+        resp = opener.open(loginURL, login_paras, timeout=3)
+        data = resp.read()
+        print data
+        if data == '{"ret":1,"msg":"\u6b22\u8fce\u56de\u6765"}':
+            return {
+                'http_type': 'http',
+                'opener': opener,
+            }
+    except Exception as err:
+        print err
 
 
 def do_checkin(opener, http_type):

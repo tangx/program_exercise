@@ -37,6 +37,9 @@ def extract_gzip(resp):
 
 
 def gzip(data):
+    from StringIO import StringIO
+    from gzip import GzipFile
+
     fileobj = StringIO(data)
     data = GzipFile(fileobj=fileobj, mode='r')
     print data

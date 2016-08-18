@@ -7,6 +7,14 @@
 import urllib
 import re
 
+import os
+import time
+
+import thread
+import threading
+
+dir_path = r'G:\pic_down'
+
 
 def main():
     abs_url = r'http://tieba.baidu.com/p/4452126446'
@@ -20,8 +28,20 @@ def main():
 
     urls = jpg_patt.findall(content)
 
+    pic_down(urls, dir_path)
+
+
+def pic_down(urls, dir_path):
     for url in urls:
-        print url
+        filename = os.path.join(dir_path, url.rsplit('/')[-1])
+        # print url, '-->', filename
+
+        time.sleep(1)
+        print 'START %s --> %s ' % (url, filename)
+        urllib.urlretrieve(url, filename=filename)
+        # print '\tEND   %s --> %s ' % (url, filename)
+        print '\tEND'
+
 
 if __name__ == "__main__":
     main()

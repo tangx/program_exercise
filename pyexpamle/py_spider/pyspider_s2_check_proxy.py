@@ -32,8 +32,9 @@ def check_proxy(proxy_addr, proxy_port, proxy_type):
     proxy_support = urllib2.ProxyHandler({proxy_type: proxy})
     # proxy_support = urllib2.ProxyHandler({'socks5': '127.0.0.1:36963'})
 
-    opener = urllib2.build_opener(proxy_support, urllib2.HTTPHandler)
+    opener = urllib2.build_opener(proxy_support, urllib2.HTTPHandler())
     urllib2.install_opener(opener=opener)
+
 
 
     try:

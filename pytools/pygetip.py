@@ -29,6 +29,7 @@ def get_ipcn_result(ip=''):
 
     content = opener.open(ipcn_url).read()
 
+    # print content
     return content
 
 
@@ -45,14 +46,43 @@ def get_ipaddr(ip=''):
         return "请输入正确的 V4 IP 或 域名"
 
 
+def get_ip_info(ip=''):
+    '''
+    获取ip或域名的地址信息
+    :param ip: ip或域名
+    :return: python 字典 utf-8
+    '''
+    content = get_ipcn_result(ip)
+
+    # ip_info_patt = r'<div id="result"><div class="well"><p>.* IP：<code>(.*?)</code></p><p>所在地理位置：<code>(.*?)</code></p><p>GeoIP: (.*?)</p></div></div>'
+    # ip_info_patt = r'<div id="result"><div class="well"><p>您查询的 IP：<code>(.*?)</code></p><p>所在地理位置：<code>(.*?)</code></p><p>GeoIP: (.*?)</p>(<p>.*?</p>)</div></div>'
+    ip_info_patt = r' IP：<code>(.*?)</code></p><p>所在地理位置：<code>(.*?)</code></p><p>GeoIP: (.*?)</p>'
+
+    ip_info_compile = re.compile(ip_info_patt)
+
+    try:
+        # print ip_info_compile.findall(content)
+        # for info in ip_info_compile.findall(content)[0]:
+        #     print info
+
+        ip_info = ip_info_compile.findall(content)[0]
+
+        return {'ipaddr': ip_info[0], 'cn_addr': ip_info[1], 'en_addr': ip_info[2]}
+
+    except:
+        return "请输入正确的 V4 IP 或 域名"
+
+
 if __name__ == "__main__":
     # myip = '61.139.2.69'
     # print get_ipaddr(myip)
     # print get_ipaddr()
 
-    print sys.argv
+    # print sys.argv
 
     try:
         print get_ipaddr(sys.argv[1])
+        # print get_ip_info('ip138.com')
     except:
-        print get_ipaddr()
+        print get_ip_info()
+        # print get_ip_info('ip138.com')

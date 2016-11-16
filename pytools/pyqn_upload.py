@@ -41,8 +41,6 @@ class QiniuUpload:
     image_md5sum = ""
     image_type = ""
     image_name = ''
-    # image_name = os.path.basename(image)
-    # print image_name
 
     db_path = os.path.abspath(os.path.dirname(sys.argv[0]))
     db_name = os.path.join(db_path, 'image.db')
@@ -120,9 +118,6 @@ class QiniuUpload:
                 # return abs_url
                 self.to_print_urls(r[0])
                 return r[0]
-                # cx.close()
-                # else:
-                #     return None
         except:
             pass
 

@@ -4,6 +4,10 @@ A python tools to upload images into qiniu bucket, which stored as files' md5-ha
 
 Uploaded images' info will be store in a sqlite3 database which is localfile. Likes ` md5-hash, image-prefix, image-type `.
 
+## requirements
+qiniu 7.0.9.1
+
+
 ## Usage
 
 1. Compele your user_conf.py

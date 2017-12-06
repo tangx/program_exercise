@@ -1,0 +1,29 @@
+C/C++ for Visual Studio Code
+
+This preview release of the extension adds language support for C/C++ to Visual Studio Code including:
+
+Language service
+Code Formatting (clang-format)
+Auto-Completion (experimental)
+Symbol Searching
+Go to Definition/Declaration
+Peek Definition/Declaration
+Class/Method Navigation
+Signature Help
+Quick Info (Hover)
+Error Squiggles
+Debugging
+Support for debugging Windows (PDB, Mingw/Cygwin), Linux and OS X applications
+Line by line code stepping
+Breakpoints (including conditional and function breakpoints)
+Variable inspection
+Multi-threaded debugging support
+Core dump debugging support
+Executing GDB or MI commands directly when using 'C++ (GDB/LLDB)' debugging environment
+For help configuring the debugger see Configuring launch.json for C/C++ debugging on our GitHub page.
+
+The first argument is a string containing the filename. The second argument is another string containing a few characters describing the way in which the file will be used. mode can be 'r' when the file will only be read, 'w' for only writing (an existing file with the same name will be erased), and 'a' opens the file for appending; any data written to the file is automatically added to the end. 'r+' opens the file for both reading and writing. The mode argument is optional; 'r' will be assumed if it’s omitted.
+
+Normally, files are opened in text mode, that means, you read and write strings from and to the file, which are encoded in a specific encoding (the default being UTF-8). 'b' appended to the mode opens the file in binary mode: now the data is read and written in the form of bytes objects. This mode should be used for all files that don’t contain text.
+
+In text mode, the default when reading is to convert platform-specific line endings (\n on Unix, \r\n on Windows) to just \n. When writing in text mode, the default is to convert occurrences of \n back to platform-specific line endings. This behind-the-scenes modification to file data is fine for text files, but will corrupt binary data like that in JPEG or EXE files. Be very careful to use binary mode when reading and writing such files.

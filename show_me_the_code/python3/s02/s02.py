@@ -5,16 +5,16 @@
 #    使用 Python 如何生成 200 个激活码（或者优惠券）？
 #
 
-## random
+# random
 # https://docs.python.org/3/library/random.html
-  # random.choices 在 python3 中可用
+# random.choices 在 python3.6 中可用。在 3.5 中不可用
 
-## string
+# string
 # https://docs.python.org/3/library/string.html
 
-## 集合
+# 集合
 # https://docs.python.org/3/tutorial/datastructures.html#sets
-  # random.choice 不能用于 set 上
+# random.choice 不能用于 set 上
 
 import random
 import string
